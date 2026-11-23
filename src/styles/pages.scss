@@ -1,0 +1,770 @@
+/* ================= Shared page pieces ================= */
+.chip {
+  display: inline-flex;
+  align-items: center;
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--accent);
+  white-space: nowrap;
+
+  &:hover {
+    color: var(--accent-hover);
+    gap: 0.55rem;
+  }
+}
+
+.page-head {
+  padding-block: 3rem 2.5rem;
+  max-width: calc(var(--container));
+
+  h1 {
+    font-size: clamp(2.1rem, 4.5vw, 3.25rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    max-width: 22ch;
+  }
+
+  p {
+    margin-top: 1rem;
+    max-width: 60ch;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+}
+
+.panel {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+
+  > h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  &--narrow {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+}
+
+.field,
+.form input,
+.form select,
+.form textarea {
+  width: 100%;
+  height: 46px;
+  padding: 0 0.95rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+}
+
+.form textarea {
+  height: auto;
+  padding: 0.75rem 0.95rem;
+  resize: vertical;
+}
+
+/* ================= Inventory filters ================= */
+.filters {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+
+  &__search {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    height: 46px;
+    padding: 0 0.95rem;
+    margin: 0;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    color: var(--text-muted);
+
+    &:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .filters {
+    grid-template-columns: 1fr 1fr;
+
+    &__search {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================= Vehicle detail page ================= */
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  padding-block: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+
+  a:hover {
+    color: var(--text);
+  }
+
+  svg {
+    opacity: 0.5;
+  }
+
+  span {
+    color: var(--text);
+    font-weight: 500;
+  }
+}
+
+.vdp {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 2.5rem;
+  align-items: start;
+
+  &__gallery {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg-muted);
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &__section {
+    padding-top: 2.5rem;
+    scroll-margin-top: 90px;
+
+    > h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  &__side {
+    position: sticky;
+    top: 92px;
+  }
+}
+
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+
+  > div {
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+
+    svg {
+      font-size: 1.25rem;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+  }
+
+  dt {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  dd {
+    margin: 0.15rem 0 0;
+    font-weight: 700;
+    font-size: 0.95rem;
+    overflow-wrap: anywhere;
+  }
+}
+
+.prose {
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 70ch;
+
+  & + & {
+    margin-top: 1rem;
+  }
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.6rem 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.95rem;
+
+    svg {
+      flex-shrink: 0;
+      padding: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+  }
+}
+
+.buy-box {
+  padding: 1.75rem;
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+
+  &__meta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  h1 {
+    margin-top: 0.35rem;
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+
+  &__price {
+    margin-top: 1.25rem;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  &__monthly {
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+
+    b {
+      color: var(--text);
+    }
+  }
+
+  &__actions {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+
+    .btn-x {
+      width: 100%;
+    }
+  }
+
+  &__perks {
+    list-style: none;
+    padding: 1.25rem 0 0;
+    margin: 1.5rem 0 0;
+    border-top: 1px solid var(--border);
+    display: grid;
+    gap: 0.7rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    svg {
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  color: #fff;
+
+  &:hover {
+    background: #1ebe5b;
+    color: #fff;
+  }
+}
+
+/* Finance calculator */
+.calc {
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  display: grid;
+  gap: 1.4rem;
+
+  &__result {
+    display: grid;
+    gap: 0.2rem;
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    background: var(--accent-soft);
+
+    span {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    strong {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    small {
+      color: var(--text-muted);
+    }
+  }
+
+  &__row {
+    display: grid;
+    gap: 0.6rem;
+    margin: 0;
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+  }
+
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    b {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+  }
+
+  &__summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 0;
+
+    div {
+      padding: 0.9rem 1rem;
+      border-radius: var(--radius-sm);
+      background: var(--bg-muted);
+    }
+
+    dt {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    dd {
+      margin: 0.15rem 0 0;
+      font-weight: 700;
+    }
+  }
+
+  &__note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+}
+
+.seg {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-muted);
+
+  button {
+    height: 36px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-muted);
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    &.is-active {
+      background: var(--bg-elevated);
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+}
+
+/* Mobile sticky bar */
+.vdp-bar {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .vdp {
+    grid-template-columns: 1fr;
+
+    &__side {
+      position: static;
+      order: -1;
+    }
+
+    &__main {
+      display: contents;
+    }
+
+    &__gallery {
+      order: -2;
+    }
+  }
+
+  .vdp__section {
+    padding-top: 1rem;
+  }
+
+  .spec-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .vdp-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    background: var(--nav-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid var(--border);
+
+    span {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    strong {
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .btn-x {
+      height: 44px;
+    }
+  }
+
+  // keep footer content clear of the fixed bar
+  .vdp ~ .section:last-child,
+  body:has(.vdp-bar) .footer {
+    padding-bottom: 5rem;
+  }
+}
+
+/* ================= Forms ================= */
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  &__field {
+    display: grid;
+    gap: 0.4rem;
+
+    &--full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin: 0;
+
+      span {
+        color: var(--accent);
+      }
+    }
+  }
+
+  &__submit {
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .form {
+    grid-template-columns: 1fr;
+
+    &__submit {
+      justify-self: stretch;
+    }
+  }
+}
+
+.form-success {
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  border-radius: var(--radius-lg);
+  border: 1px dashed var(--border);
+
+  > svg {
+    font-size: 2.5rem;
+    color: #22a35a;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  p {
+    color: var(--text-muted);
+    max-width: 40ch;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* ================= Contact / Trade-in / About ================= */
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  transition: border-color 0.2s, transform 0.2s;
+
+  .feature__icon {
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  strong {
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+}
+
+a.contact-item:hover {
+  border-color: var(--accent);
+  transform: translateX(2px);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+
+  &__n {
+    font-size: 0.8rem !important;
+    font-weight: 600;
+    color: var(--accent) !important;
+    margin-bottom: 0.35rem;
+  }
+}
+
+.stat-band {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  overflow: hidden;
+
+  > div {
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+
+    & + div {
+      border-left: 1px solid var(--border);
+    }
+  }
+
+  dt {
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  dd {
+    margin: 0.25rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .stat-band {
+    grid-template-columns: 1fr 1fr;
+
+    > div:nth-child(3) {
+      border-left: none;
+    }
+
+    > div:nth-child(n + 3) {
+      border-top: 1px solid var(--border);
+    }
+  }
+}
+
+.message-page {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  padding-block: 6rem 2rem;
+
+  h1 {
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+  }
+
+  p {
+    margin: 1rem 0 2rem;
+    max-width: 52ch;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+}
+
+/* ================= Image loading shimmer ================= */
+/* Sits behind the photo; the image covers it once loaded. */
+.car-card__stage::before,
+.vdp__gallery::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+body[data-theme="dark"] .car-card__stage::before,
+body[data-theme="dark"] .vdp__gallery::before {
+  background-image: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent 70%
+  );
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .car-card__stage::before,
+  .vdp__gallery::before {
+    animation: none;
+  }
+}
